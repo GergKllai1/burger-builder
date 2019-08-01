@@ -11,7 +11,8 @@ export class Checkout extends Component {
       meat: 1,
       cheese: 1,
       bacon: 1
-    }
+    },
+    totalPrice: 4
   };
 
   componentWillMount() {
@@ -48,7 +49,7 @@ export class Checkout extends Component {
           render={props => (
             <ContactData
               ingredients={this.state.ingredients}
-              price={this.state.totalPrice}
+              totalPrice={this.state.totalPrice}
               {...props}
             />
           )}
