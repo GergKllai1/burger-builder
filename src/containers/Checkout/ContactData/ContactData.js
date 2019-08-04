@@ -57,7 +57,7 @@ export class ContactData extends Component {
             { value: "cheapest", displayValue: "Cheapest" }
           ]
         },
-        value: "fastest"
+        value: ""
       }
     }
   };
@@ -80,6 +80,14 @@ export class ContactData extends Component {
       });
   };
 
+  inputChangedHandler = (e, inputIdentifier) => {
+    const updatedOrderForm = { ...this.state.orderForm };
+    const updatedFormElement = { ...updatedOrderForm[inputIdentifier] };
+    updatedFormElement.value = e.target.value;
+    updatedOrderForm[inputIdentifier] = updatedFormElement;
+    this.setState({ orderForm: updatedOrderForm });
+  };
+
   render() {
     const formElementsArray = [];
     for (let key in this.state.orderForm) {
@@ -93,9 +101,10 @@ export class ContactData extends Component {
         {formElementsArray.map(formElement => (
           <Input
             key={formElement.id}
-            elemetType={formElement.config.elementType}
+            inputtype={formElement.config.elementType}
             elementConfig={formElement.config.elementConfig}
             value={formElement.config.value}
+            changed={event => this.inputChangedHandler(event, formElement.id)}
           />
         ))}
         <Button btnType="Success" clicked={this.orderHandler}>
